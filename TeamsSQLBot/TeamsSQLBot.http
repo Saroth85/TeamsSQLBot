@@ -1,0 +1,6 @@
+@TeamsSQLBot_HostAddress = http://localhost:5026
+
+GET {{TeamsSQLBot_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
