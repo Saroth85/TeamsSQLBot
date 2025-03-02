@@ -14,7 +14,6 @@ var configuration = builder.Configuration;
 builder.Services.AddSingleton(configuration);
 
 builder.Services.AddControllers(); 
-
 builder.Services.AddSingleton<SQLHelper>();
 builder.Services.AddSingleton<OpenAIHelper>();
 builder.Services.AddTransient<IBot, TeamsBot>();

@@ -2,6 +2,9 @@
 using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 
+/// <summary>
+///  Questa classe aiuta a eseguire query SQL su un database SQL Server.
+/// </summary>
 public class SQLHelper
 {
     private const string connectionString = "";

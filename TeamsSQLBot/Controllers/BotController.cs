@@ -4,6 +4,10 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using System.Threading.Tasks;
 using System.Threading;
 
+/// <summary>
+/// Questo controller gestisce le richieste HTTP inviate al bot.
+/// </summary>
+
 [Route("api/messages")]
 [ApiController]
 public class BotController : ControllerBase

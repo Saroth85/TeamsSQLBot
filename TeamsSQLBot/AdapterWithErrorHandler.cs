@@ -3,6 +3,9 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
 
+/// <summary>
+/// AdapterWithErrorHandler
+/// </summary>
 public class AdapterWithErrorHandler : CloudAdapter
 {
     public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)

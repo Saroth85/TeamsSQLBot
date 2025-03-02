@@ -5,6 +5,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+/// <summary>
+///   Questa classe aiuta a chiamare l'API di OpenAI per generare query SQL.    
+/// </summary>
 public class OpenAIHelper
 {
     private static readonly HttpClient client = new HttpClient();

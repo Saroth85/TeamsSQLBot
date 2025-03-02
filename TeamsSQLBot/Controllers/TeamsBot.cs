@@ -4,6 +4,9 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 
+/// <summary>
+/// Questo bot gestisce le richieste inviate a Teams.
+/// </summary>
 public class TeamsBot : ActivityHandler
 {
     private readonly OpenAIHelper _aiHelper;
