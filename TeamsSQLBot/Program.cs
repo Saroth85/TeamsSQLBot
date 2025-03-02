@@ -1,23 +1,36 @@
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// **Carica la configurazione dal file appsettings.json**
+var configuration = builder.Configuration;
+builder.Services.AddSingleton(configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// ✅ Aggiunge il supporto per API Controllers
+builder.Services.AddControllers(); // IMPORTANTE
 
+builder.Services.AddSingleton<SQLHelper>();
+builder.Services.AddSingleton<OpenAIHelper>();
+builder.Services.AddTransient<IBot, TeamsBot>();
+// ✅ Registra il Bot Framework
+builder.Services.AddSingleton<BotFrameworkAuthentication>(sp =>
+    new ConfigurationBotFrameworkAuthentication(configuration)
+);
+
+builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+builder.Services.AddTransient<IBot, TeamsBot>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+// ✅ Configura il middleware per gestire le richieste API
+app.UseRouting();
+//app.UseAuthorization();
+app.MapControllers(); // IMPORTANTE
 
 app.Run();
