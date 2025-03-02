@@ -9,17 +9,16 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// **Carica la configurazione dal file appsettings.json**
+//to get the configuration from appsettings.json include the microsoft bot key<- important
 var configuration = builder.Configuration;
 builder.Services.AddSingleton(configuration);
 
-// ✅ Aggiunge il supporto per API Controllers
-builder.Services.AddControllers(); // IMPORTANTE
+builder.Services.AddControllers(); 
 
 builder.Services.AddSingleton<SQLHelper>();
 builder.Services.AddSingleton<OpenAIHelper>();
 builder.Services.AddTransient<IBot, TeamsBot>();
-// ✅ Registra il Bot Framework
+// Registra il Bot Framework
 builder.Services.AddSingleton<BotFrameworkAuthentication>(sp =>
     new ConfigurationBotFrameworkAuthentication(configuration)
 );
@@ -28,9 +27,9 @@ builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>
 builder.Services.AddTransient<IBot, TeamsBot>();
 var app = builder.Build();
 
-// ✅ Configura il middleware per gestire le richieste API
+// Configura il middleware per gestire le richieste API
 app.UseRouting();
 //app.UseAuthorization();
-app.MapControllers(); // IMPORTANTE
+app.MapControllers();
 
 app.Run();
